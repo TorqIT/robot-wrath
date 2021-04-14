@@ -3,6 +3,16 @@
   src: url("./Fonts/nulshock.ttf");
 }
 
+@font-face {
+  font-family: "Power";
+  src: url("./Fonts/Optimus.otf");
+}
+
+@font-face {
+  font-family: "Health";
+  src: url("./Fonts/911porschav3.ttf");
+}
+
 .robotList {
   background-color: white;
   height: 100%;
@@ -10,7 +20,7 @@
 }
 
 .robotDisplay {
-  width: 440px;
+  width: 620px;
   padding: 5px;
   background-color: #f1e9ff;
   border: 3px solid rgb(142, 142, 170);
@@ -24,6 +34,59 @@
 }
 
 .name {
+  align-items: center;
   color: #1c1142;
-  font-size: 18px;
+  font-size: 22px;
+  width: 505px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.powerWrapper {
+  font-size: 12px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.power {
+  font-family: "Power";
+  font-size: 26px;
+  margin-left: 5px;
+}
+
+.healthWrapper {
+  flex: 1;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.healthBar {
+  flex: 1;
+  background-color: #1c1142;
+  font-size: 30px;
+  margin-left: 10px;
+  height: 30px;
+  position: relative;
+  font-family: "Health";
+}
+
+.filledHealthBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #ff1131;
+  z-index: 1;
+  overflow: hidden;
+  transition: 0.4s;
 }

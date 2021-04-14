@@ -15,9 +15,40 @@ const RobotDisplay: React.FC<IProps> = ({ robot, status }) => {
         <img src={robotImage} style={{ border: "6px solid " + robot.color }} />
         <div style={{ padding: 10 }}>
           <div className={styles.name}>{robot.name}</div>
-          <div style={{ display: "flex" }}>
-            <div>Power: {status.power}</div>
-            <div>Health: {status.health}</div>
+          <div className={styles.stats}>
+            <div className={styles.powerWrapper}>
+              Power: <span className={styles.power}>{status.power}</span>
+            </div>
+            <div className={styles.healthWrapper}>
+              Health:
+              <div className={styles.healthBar}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 4,
+                    left: 10,
+                    color: "white",
+                  }}
+                >
+                  {status.health}
+                </div>
+                <div
+                  className={styles.filledHealthBar}
+                  style={{ width: status.health / 10 + "%" }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 4,
+                      left: 10,
+                      color: "black",
+                    }}
+                  >
+                    {status.health}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
