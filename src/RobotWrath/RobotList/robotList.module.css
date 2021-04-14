@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Scifi";
+  src: url("./Fonts/nulshock.ttf");
+}
+
+.robotList {
+  background-color: white;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.robotDisplay {
+  width: 360px;
+  padding: 5px;
+  background-color: #f1e9ff;
+  border: 3px solid rgb(142, 142, 170);
+  border-top-color: rgb(205, 205, 230);
+}
+
+.internal {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  margin-left: 10px;
+  color: #1c1142;
+  font-size: 18px;
+  font-family: "Scifi";
+}

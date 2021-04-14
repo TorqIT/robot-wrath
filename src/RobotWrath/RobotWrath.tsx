@@ -8,8 +8,9 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
+        width: "calc(100vw - 400px)",
+        height: "calc(100vh - 200px)",
+        padding: "100px 200px",
         backgroundColor: "#bfbfde",
         display: "flex",
         justifyContent: "center",

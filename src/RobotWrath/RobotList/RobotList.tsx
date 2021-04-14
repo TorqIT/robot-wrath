@@ -1,6 +1,7 @@
 import React from "react";
 import { Robot } from "../robots/interfaces";
 import { RobotDisplay } from "./RobotDisplay";
+import styles from "./robotList.module.css";
 
 interface IProps {
   robots: Robot[];
@@ -8,7 +9,7 @@ interface IProps {
 
 const RobotList: React.FC<IProps> = ({ robots }) => {
   return (
-    <div>
+    <div className={styles.robotList}>
       {robots.map((r, index) => (
         <RobotDisplay key={index} robot={r} />
       ))}

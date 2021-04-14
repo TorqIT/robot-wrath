@@ -1,8 +1,8 @@
 import { Robot } from "./interfaces";
 
 const rando: Robot = {
-  name: "rando",
-  color: "#ccc",
+  name: "Rando",
+  color: "#f33",
 };
 
 export { rando };
