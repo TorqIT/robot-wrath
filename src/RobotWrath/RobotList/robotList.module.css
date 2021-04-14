@@ -10,11 +10,12 @@
 }
 
 .robotDisplay {
-  width: 360px;
+  width: 440px;
   padding: 5px;
   background-color: #f1e9ff;
   border: 3px solid rgb(142, 142, 170);
   border-top-color: rgb(205, 205, 230);
+  font-family: "Scifi";
 }
 
 .internal {
@@ -23,8 +24,6 @@
 }
 
 .name {
-  margin-left: 10px;
   color: #1c1142;
   font-size: 18px;
-  font-family: "Scifi";
 }

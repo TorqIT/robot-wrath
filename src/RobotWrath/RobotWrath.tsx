@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { RobotList } from "./RobotList/RobotList";
-import { robots } from "./robots";
+import { robots as submittedRobots } from "./robots";
+import { RobotCombatant } from "./interfaces";
+import { generateCombatants, getStatus } from "./utils";
 
 interface IProps {}
 
 const RobotWrath: React.FC<IProps> = ({}) => {
+  const [robots, setRobots] = useState<RobotCombatant[]>(
+    generateCombatants(submittedRobots)
+  );
+
+  const status = useMemo(() => getStatus(robots), [robots]);
+
   return (
     <div
       style={{
@@ -17,7 +25,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         alignItems: "center",
       }}
     >
-      <RobotList robots={robots} />
+      <RobotList robots={robots} status={status} />
     </div>
   );
 };

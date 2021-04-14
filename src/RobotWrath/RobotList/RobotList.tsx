@@ -1,18 +1,25 @@
 import React from "react";
-import { Robot } from "../robots/interfaces";
+import { Robot, RobotCombatant, RobotStatus } from "../interfaces";
 import { RobotDisplay } from "./RobotDisplay";
 import styles from "./robotList.module.css";
 
 interface IProps {
-  robots: Robot[];
+  robots: RobotCombatant[];
+  status: RobotStatus[];
 }
 
-const RobotList: React.FC<IProps> = ({ robots }) => {
+const RobotList: React.FC<IProps> = ({ robots, status }) => {
   return (
     <div className={styles.robotList}>
-      {robots.map((r, index) => (
-        <RobotDisplay key={index} robot={r} />
-      ))}
+      {status
+        .sort((a, b) => a.health - b.health)
+        .map((s) => (
+          <RobotDisplay
+            key={s.robotId}
+            robot={robots.find((r) => r.id == s.robotId)!}
+            status={s}
+          />
+        ))}
     </div>
   );
 };

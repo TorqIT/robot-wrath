@@ -1,4 +1,4 @@
-import { Robot } from "./interfaces";
+import { Robot } from "../interfaces";
 
 const rando: Robot = {
   name: "Rando",
