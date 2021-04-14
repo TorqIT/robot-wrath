@@ -12,7 +12,7 @@ const RobotList: React.FC<IProps> = ({ robots, status }) => {
   return (
     <div className={styles.robotList}>
       {status
-        .sort((a, b) => a.health - b.health)
+        .sort((a, b) => b.health - a.health)
         .map((s) => (
           <RobotDisplay
             key={s.robotId}

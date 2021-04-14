@@ -1,8 +1,15 @@
 import { Robot } from "../interfaces";
 
-const rando: Robot = {
-  name: "Rando",
-  color: "#f33",
-};
+export function rando(): Robot {
+  return {
+    name: "Rando " + Math.floor(Math.random() * 1000),
+    color: "#f33",
+    execute: (you, robots) => {
+      const target = robots[Math.floor(Math.random() * robots.length)].robotId;
 
-export { rando };
+      console.log("I'm attacking ", target);
+
+      return target;
+    },
+  };
+}

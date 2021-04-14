@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
-import { RobotCombatant } from "./interfaces";
-import { generateCombatants, getStatus } from "./utils";
+import { RobotCombatant, TurnEvent } from "./interfaces";
+import { advance, generateCombatants, getStatus } from "./gameLogic";
 
 interface IProps {}
 
@@ -11,7 +11,9 @@ const RobotWrath: React.FC<IProps> = ({}) => {
     generateCombatants(submittedRobots)
   );
 
-  const status = useMemo(() => getStatus(robots), [robots]);
+  const [events, setEvents] = useState<TurnEvent[][]>([]);
+
+  const status = useMemo(() => getStatus(robots, events), [robots, events]);
 
   return (
     <div
@@ -21,11 +23,21 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         padding: "100px 200px",
         backgroundColor: "#bfbfde",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <RobotList robots={robots} status={status} />
+      <div>
+        <button
+          onClick={() => setEvents(events.concat([advance(robots, events)]))}
+        >
+          Advance
+        </button>
+      </div>
+      <div style={{ flex: 1 }}>
+        <RobotList robots={robots} status={status} />
+      </div>
     </div>
   );
 };
