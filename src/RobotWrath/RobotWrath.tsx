@@ -21,8 +21,8 @@ const RobotWrath: React.FC<IProps> = ({}) => {
     <div
       style={{
         width: "calc(100vw - 400px)",
-        height: "100vh",
-        padding: "0px 200px",
+        height: "calc(100vh - 100px)",
+        padding: "50px 200px",
         backgroundColor: "#bfbfde",
         display: "flex",
         flexDirection: "column",
@@ -31,7 +31,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       }}
     >
       <div style={{ marginBottom: 10, display: "flex" }}>
-        <div
+        <button
           className={styles.niceButton}
           onClick={() => {
             setRobots(generateCombatants(submittedRobots));
@@ -39,15 +39,16 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           }}
         >
           Reset Battle
-        </div>
-        <div
+        </button>
+        <button
           className={styles.niceButton}
           onClick={() => setEvents(events.concat([advance(robots, events)]))}
+          disabled={status.filter((s) => s.health > 0).length <= 1}
         >
           Advance
-        </div>
+        </button>
       </div>
-      <div style={{ height: "calc(100vh - 175px)", display: "flex" }}>
+      <div style={{ flex: 1, overflowY: "hidden", display: "flex" }}>
         <div style={{ height: "100%" }}>
           <RobotList robots={robots} status={status} />
         </div>

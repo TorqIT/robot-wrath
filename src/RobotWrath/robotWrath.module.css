@@ -10,7 +10,17 @@
   border-top-color: rgb(158, 140, 173);
   border-left-color: rgb(158, 140, 173);
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  margin: 0px 10px 2px 0px;
+  margin: 0px 20px 2px 0px;
+}
+
+.niceButton:disabled,
+.niceButton:hover:disabled {
+  background-color: rgb(122, 115, 128);
+  color: rgb(218, 217, 228);
+  border-top-color: rgb(158, 140, 173);
+  border-left-color: rgb(158, 140, 173);
+  border-bottom-color: rgb(101, 97, 105);
+  border-right-color: rgb(101, 97, 105);
 }
 
 .niceButton:hover {
@@ -24,5 +34,5 @@
   border-left-color: rgb(23, 22, 24);
   border-bottom-color: rgb(158, 140, 173);
   border-right-color: rgb(158, 140, 173);
-  margin: 2px 8px 0px 2px;
+  margin: 2px 18px 0px 2px;
 }
