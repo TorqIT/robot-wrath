@@ -20,8 +20,8 @@ const RobotWrath: React.FC<IProps> = ({}) => {
     <div
       style={{
         width: "calc(100vw - 400px)",
-        height: "calc(100vh - 200px)",
-        padding: "100px 200px",
+        height: "100vh",
+        padding: "0px 200px",
         backgroundColor: "#bfbfde",
         display: "flex",
         flexDirection: "column",
@@ -36,7 +36,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           Advance
         </button>
       </div>
-      <div style={{ flex: 1, display: "flex" }}>
+      <div style={{ height: "calc(100vh - 175px)", display: "flex" }}>
         <div style={{ height: "100%" }}>
           <RobotList robots={robots} status={status} />
         </div>
