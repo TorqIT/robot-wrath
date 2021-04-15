@@ -60,18 +60,16 @@ export function advance(
   events: TurnEvent[][]
 ): TurnEvent[] {
   const statuses = getStatus(robots, events);
-  const livingRobots = robots.filter((r) =>
-    statuses.some((s) => s.robotId == r.id)
-  );
+  const livingRobotStatuses = statuses.filter((s) => s.health > 0);
 
   return robots
-    .filter((r) => statuses.some((s) => s.robotId == r.id))
+    .filter((r) => livingRobotStatuses.some((s) => s.robotId == r.id))
     .map(
       (r): TurnEvent => ({
         robotId: r.id,
         target: r.execute(
-          statuses.find((s) => s.robotId == r.id)!,
-          statuses.filter((s) => s.robotId != r.id)
+          livingRobotStatuses.find((s) => s.robotId == r.id)!,
+          livingRobotStatuses.filter((s) => s.robotId != r.id)
         ),
       })
     );
