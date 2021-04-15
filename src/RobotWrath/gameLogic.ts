@@ -74,3 +74,19 @@ export function advance(
       })
     );
 }
+
+export function simulateGame(
+  robots: RobotCombatant[],
+  events: TurnEvent[][]
+): TurnEvent[][] {
+  let currentEvents = events.slice();
+  let statuses = getStatus(robots, currentEvents);
+
+  while (statuses.filter((s) => s.health > 0).length > 1) {
+    const nextEvents = advance(robots, currentEvents);
+    statuses = applyEvents(statuses, nextEvents);
+    currentEvents = currentEvents.concat([nextEvents]);
+  }
+
+  return currentEvents;
+}

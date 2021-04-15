@@ -2,7 +2,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
 import { RobotCombatant, TurnEvent } from "./interfaces";
-import { advance, generateCombatants, getStatus } from "./gameLogic";
+import {
+  advance,
+  generateCombatants,
+  getStatus,
+  simulateGame,
+} from "./gameLogic";
 import { EventList } from "./EventList";
 import styles from "./robotWrath.module.css";
 
@@ -71,6 +76,13 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           disabled={status.filter((s) => s.health > 0).length <= 1}
         >
           {isRunning ? "Stop Auto Battling" : "Auto Battle"}
+        </button>
+        <button
+          className={styles.niceButton}
+          onClick={() => setEvents(simulateGame(robots, events))}
+          disabled={status.filter((s) => s.health > 0).length <= 1}
+        >
+          Perform Full Battle
         </button>
       </div>
       <div style={{ flex: 1, overflowY: "hidden", display: "flex" }}>
