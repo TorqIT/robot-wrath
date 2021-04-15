@@ -4,6 +4,7 @@ import { robots as submittedRobots } from "./robots";
 import { RobotCombatant, TurnEvent } from "./interfaces";
 import { advance, generateCombatants, getStatus } from "./gameLogic";
 import { EventList } from "./EventList";
+import styles from "./robotWrath.module.css";
 
 interface IProps {}
 
@@ -30,11 +31,12 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       }}
     >
       <div style={{ marginBottom: 10 }}>
-        <button
+        <div
+          className={styles.niceButton}
           onClick={() => setEvents(events.concat([advance(robots, events)]))}
         >
           Advance
-        </button>
+        </div>
       </div>
       <div style={{ height: "calc(100vh - 175px)", display: "flex" }}>
         <div style={{ height: "100%" }}>

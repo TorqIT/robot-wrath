@@ -1,0 +1,28 @@
+.niceButton {
+  background-color: rgb(46, 37, 54);
+  color: white;
+  padding: 10px;
+  font-family: "Scifi";
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+  border: 3px solid rgb(23, 22, 24);
+  border-top-color: rgb(158, 140, 173);
+  border-left-color: rgb(158, 140, 173);
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
+  margin: 0px 2px 2px 0px;
+}
+
+.niceButton:hover {
+  background-color: rgb(64, 53, 75);
+}
+
+.niceButton:hover:active {
+  background-color: rgb(17, 14, 20);
+  box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.3) inset;
+  border-top-color: rgb(23, 22, 24);
+  border-left-color: rgb(23, 22, 24);
+  border-bottom-color: rgb(158, 140, 173);
+  border-right-color: rgb(158, 140, 173);
+  margin: 2px 0px 0px 2px;
+}

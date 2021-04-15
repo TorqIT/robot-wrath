@@ -1,18 +1,3 @@
-@font-face {
-  font-family: "Scifi";
-  src: url("./Fonts/nulshock.ttf");
-}
-
-@font-face {
-  font-family: "Power";
-  src: url("./Fonts/Optimus.otf");
-}
-
-@font-face {
-  font-family: "Health";
-  src: url("./Fonts/911porschav3.ttf");
-}
-
 .robotList {
   background-color: white;
   height: 100%;
