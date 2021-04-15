@@ -3,6 +3,7 @@ import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
 import { RobotCombatant, TurnEvent } from "./interfaces";
 import { advance, generateCombatants, getStatus } from "./gameLogic";
+import { EventList } from "./EventList";
 
 interface IProps {}
 
@@ -28,15 +29,20 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         alignItems: "center",
       }}
     >
-      <div>
+      <div style={{ marginBottom: 10 }}>
         <button
           onClick={() => setEvents(events.concat([advance(robots, events)]))}
         >
           Advance
         </button>
       </div>
-      <div style={{ flex: 1 }}>
-        <RobotList robots={robots} status={status} />
+      <div style={{ flex: 1, display: "flex" }}>
+        <div style={{ height: "100%" }}>
+          <RobotList robots={robots} status={status} />
+        </div>
+        <div style={{ height: "100%", marginLeft: 100 }}>
+          <EventList robots={robots} events={events} />
+        </div>
       </div>
     </div>
   );
