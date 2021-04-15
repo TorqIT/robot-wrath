@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
 import { RobotCombatant, TurnEvent } from "./interfaces";
@@ -16,6 +16,24 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   const [events, setEvents] = useState<TurnEvent[][]>([]);
 
   const status = useMemo(() => getStatus(robots, events), [robots, events]);
+
+  const [isRunning, setRunning] = useState(false);
+
+  useEffect(() => {
+    if (status.filter((s) => s.health > 0).length <= 1) {
+      setRunning(false);
+      return;
+    }
+
+    if (isRunning) {
+      const timer = setTimeout(performAdvance, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isRunning, events]);
+
+  function performAdvance() {
+    setEvents(events.concat([advance(robots, events)]));
+  }
 
   return (
     <div
@@ -42,10 +60,17 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         </button>
         <button
           className={styles.niceButton}
-          onClick={() => setEvents(events.concat([advance(robots, events)]))}
+          onClick={performAdvance}
           disabled={status.filter((s) => s.health > 0).length <= 1}
         >
           Advance
+        </button>
+        <button
+          className={styles.niceButton}
+          onClick={() => setRunning(!isRunning)}
+          disabled={status.filter((s) => s.health > 0).length <= 1}
+        >
+          {isRunning ? "Stop Auto Battling" : "Auto Battle"}
         </button>
       </div>
       <div style={{ flex: 1, overflowY: "hidden", display: "flex" }}>
