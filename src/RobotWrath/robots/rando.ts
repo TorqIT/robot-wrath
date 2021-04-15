@@ -5,11 +5,9 @@ export function rando(): Robot {
     name: "Rando " + Math.floor(Math.random() * 1000),
     color: "#f33",
     execute: (you, robots) => {
-      const target = robots[Math.floor(Math.random() * robots.length)].robotId;
-
-      console.log("I'm attacking ", target);
-
-      return target;
+      if (Math.random() > 0.2) {
+        return robots[Math.floor(Math.random() * robots.length)].robotId;
+      }
     },
   };
 }
