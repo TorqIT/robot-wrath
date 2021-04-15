@@ -29,27 +29,30 @@ function applyEvents(
   robots: RobotStatus[],
   events: TurnEvent[]
 ): RobotStatus[] {
-  const endState = robots.map((r) => ({ ...r }));
-
-  events.forEach((e) => {
-    if (e.target) {
-      const attackerCurrent = robots.find((r) => r.robotId == e.robotId)!;
-      const defenderResult = endState.find((r) => r.robotId == e.target)!;
-
-      if (events.find((de) => de.robotId == e.target)?.target) {
-        defenderResult.health -= attackerCurrent.power;
-        defenderResult.power++;
-      } else {
-        defenderResult.health -= Math.floor(attackerCurrent.power / 2);
-        defenderResult.power += 2;
-      }
-    } else {
-      const selfResult = endState.find((r) => r.robotId == e.robotId)!;
-      selfResult.power -= 1;
+  return robots.map((r) => {
+    if (r.health <= 0) {
+      return { ...r };
     }
-  });
 
-  return endState;
+    const selfAction = events.find((e) => e.robotId == r.robotId)!;
+    const eventsTargettingSelf = events.filter((e) => e.target == r.robotId);
+
+    let healthChange = eventsTargettingSelf.reduce(
+      (acc, current) =>
+        acc -
+        robots.find((attacker) => attacker.robotId == current.robotId)!.power,
+      0
+    );
+    let powerChange = eventsTargettingSelf.length;
+
+    return {
+      robotId: r.robotId,
+      health:
+        r.health +
+        (selfAction.target ? healthChange : Math.floor(healthChange / 2)),
+      power: r.power + (selfAction.target ? powerChange : powerChange * 2 - 1),
+    };
+  });
 }
 
 export function advance(
