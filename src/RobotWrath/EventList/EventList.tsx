@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { RobotCombatant, TurnEvent } from "../interfaces";
 import { EventDisplay } from "./EventDisplay";
 
@@ -8,6 +8,12 @@ interface IProps {
 }
 
 const EventList: React.FC<IProps> = ({ robots, events }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [events]);
+
   return (
     <div
       style={{
@@ -25,6 +31,7 @@ const EventList: React.FC<IProps> = ({ robots, events }) => {
           <div>--</div>
         </div>
       ))}
+      <div ref={ref}></div>
     </div>
   );
 };
