@@ -11,6 +11,8 @@ interface IProps {
 
 const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
   ({ robot, status }, ref) => {
+    const displayHealth = Math.max(status.health, 0);
+
     return (
       <div ref={ref} className={styles.robotDisplay}>
         <div className={styles.internal}>
@@ -35,11 +37,11 @@ const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
                       color: "white",
                     }}
                   >
-                    {status.health}
+                    {displayHealth}
                   </div>
                   <div
                     className={styles.filledHealthBar}
-                    style={{ width: status.health / 10 + "%" }}
+                    style={{ width: displayHealth / 10 + "%" }}
                   >
                     <div
                       style={{
@@ -49,7 +51,7 @@ const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
                         color: "black",
                       }}
                     >
-                      {status.health}
+                      {displayHealth}
                     </div>
                   </div>
                 </div>
