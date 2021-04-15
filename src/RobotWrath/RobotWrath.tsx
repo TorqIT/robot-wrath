@@ -30,7 +30,16 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         alignItems: "center",
       }}
     >
-      <div style={{ marginBottom: 10 }}>
+      <div style={{ marginBottom: 10, display: "flex" }}>
+        <div
+          className={styles.niceButton}
+          onClick={() => {
+            setRobots(generateCombatants(submittedRobots));
+            setEvents([]);
+          }}
+        >
+          Reset Battle
+        </div>
         <div
           className={styles.niceButton}
           onClick={() => setEvents(events.concat([advance(robots, events)]))}
