@@ -1,8 +1,9 @@
 import React, { forwardRef } from "react";
-import { Robot, RobotCombatant, RobotStatus } from "../interfaces";
 import styles from "./robotList.module.css";
 import robotImage from "../Images/robot.png";
 import boomImage from "../Images/boom.png";
+import { RobotIcon } from "../RobotIcon";
+import { RobotCombatant, RobotStatus } from "../../interfaces";
 
 interface IProps {
   robot: RobotCombatant;
@@ -16,10 +17,7 @@ const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
     return (
       <div ref={ref} className={styles.robotDisplay}>
         <div className={styles.internal}>
-          <img
-            src={status.health > 0 ? robot.icon : boomImage}
-            style={{ border: "6px solid " + robot.color }}
-          />
+          <RobotIcon robot={robot} boom={status.health <= 0} />
           <div style={{ padding: 10 }}>
             <div className={styles.name}>{robot.name}</div>
             <div className={styles.stats}>

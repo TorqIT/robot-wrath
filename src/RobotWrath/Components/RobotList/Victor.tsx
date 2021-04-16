@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { RobotCombatant } from "../../interfaces";
 import boom from "../Images/boom.png";
-import { RobotCombatant, RobotStatus } from "../interfaces";
+import { RobotIcon } from "../RobotIcon";
 import styles from "./robotList.module.css";
 
 interface IProps {
@@ -35,12 +36,7 @@ const Victor: React.FC<IProps> = ({ robot }) => {
       }}
     >
       <div className={styles.victor}>
-        <img
-          src={internalBot ? internalBot.icon : boom}
-          style={{
-            border: "6px solid " + (internalBot ? internalBot.color : "#000"),
-          }}
-        />
+        <RobotIcon robot={internalBot} />
         <span style={{ marginLeft: 10, fontSize: internalBot ? 30 : 40 }}>
           {getText()}
         </span>

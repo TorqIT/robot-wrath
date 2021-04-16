@@ -1,6 +1,6 @@
 import React from "react";
 import FlipMove from "react-flip-move";
-import { Robot, RobotCombatant, RobotStatus } from "../interfaces";
+import { RobotCombatant, RobotStatus } from "../../interfaces";
 import { RobotDisplay } from "./RobotDisplay";
 import styles from "./robotList.module.css";
 

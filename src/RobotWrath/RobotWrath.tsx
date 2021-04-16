@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
 import { RobotCombatant, RobotEntrant, TurnEvent } from "./interfaces";
 import {
@@ -9,9 +8,10 @@ import {
   getVictor,
   simulateGame,
 } from "./gameLogic";
-import { EventList } from "./EventList";
+import { EventList } from "./Components/EventList";
 import styles from "./robotWrath.module.css";
-import { Victor } from "./RobotList/Victor";
+import { RobotList, Victor } from "./Components/RobotList";
+import { WrathButtonPanel } from "./Components/WrathButtonPanel/WrathButtonPanel";
 
 interface IProps {}
 
@@ -72,52 +72,30 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         alignItems: "center",
       }}
     >
-      <div style={{ marginBottom: 10, display: "flex" }}>
-        <button
-          className={styles.niceButton}
-          onClick={() => {
-            setRobots(generateCombatants(robotEntrants));
-            setRunning(false);
-            setEvents([]);
-          }}
-        >
-          Reset Battle
-        </button>
-        <button
-          className={styles.niceButton}
-          onClick={() => {
-            performAdvance();
-            setRunning(false);
-          }}
-          disabled={victor !== undefined}
-        >
-          Advance
-        </button>
-        <button
-          className={
-            styles.niceButton + (isRunning ? " " + styles.pressedIn : "")
+      <WrathButtonPanel
+        onReset={() => {
+          setRobots(generateCombatants(robotEntrants));
+          setRunning(false);
+          setEvents([]);
+        }}
+        onAdvance={() => {
+          performAdvance();
+          setRunning(false);
+        }}
+        onAutoBattle={() => setRunning(!isRunning)}
+        onPerformFull={() => {
+          if (victor === undefined) {
+            setEvents(simulateGame(robots, events));
+          } else {
+            const combatants = generateCombatants(robotEntrants);
+            setRobots(combatants);
+            setEvents(simulateGame(combatants, []));
           }
-          onClick={() => setRunning(!isRunning)}
-          style={{ width: 220 }}
-          disabled={victor !== undefined}
-        >
-          {isRunning ? "Stop Auto Battling" : "Auto Battle"}
-        </button>
-        <button
-          className={styles.niceButton}
-          onClick={() => {
-            if (victor === undefined) {
-              setEvents(simulateGame(robots, events));
-            } else {
-              const combatants = generateCombatants(robotEntrants);
-              setRobots(combatants);
-              setEvents(simulateGame(combatants, []));
-            }
-          }}
-        >
-          Perform Full Battle
-        </button>
-      </div>
+        }}
+        hasVictor={victor !== undefined}
+        isRunning={isRunning}
+      />
+
       <div style={{ flex: 1, overflow: "hidden", display: "flex" }}>
         <div style={{ height: "100%" }}>
           <RobotList robots={robots} status={status} />

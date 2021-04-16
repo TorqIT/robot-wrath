@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { RobotCombatant, TurnEvent } from "../interfaces";
+import { RobotCombatant, TurnEvent } from "../../interfaces";
 import { EventDisplay } from "./EventDisplay";
 
 interface IProps {

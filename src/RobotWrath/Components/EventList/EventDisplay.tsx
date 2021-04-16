@@ -1,5 +1,5 @@
 import React from "react";
-import { Robot, RobotCombatant, TurnEvent } from "../interfaces";
+import { Robot, RobotCombatant, TurnEvent } from "../../interfaces";
 
 interface IProps {
   robots: RobotCombatant[];
