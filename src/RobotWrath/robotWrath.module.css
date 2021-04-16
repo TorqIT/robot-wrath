@@ -13,6 +13,16 @@
   margin: 0px 20px 2px 0px;
 }
 
+.niceButton.pressedIn {
+  background-color: rgb(227, 219, 235);
+  color: rgb(46, 37, 54);
+  margin: 1px 19px 1px 1px;
+}
+
+.niceButton.pressedIn:hover {
+  background-color: rgb(203, 191, 214);
+}
+
 .niceButton:disabled,
 .niceButton:hover:disabled {
   background-color: rgb(122, 115, 128);

@@ -70,6 +70,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           className={styles.niceButton}
           onClick={() => {
             setRobots(generateCombatants(submittedRobots));
+            setRunning(false);
             setEvents([]);
           }}
         >
@@ -77,14 +78,20 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         </button>
         <button
           className={styles.niceButton}
-          onClick={performAdvance}
+          onClick={() => {
+            performAdvance();
+            setRunning(false);
+          }}
           disabled={victor !== undefined}
         >
           Advance
         </button>
         <button
-          className={styles.niceButton}
+          className={
+            styles.niceButton + (isRunning ? " " + styles.pressedIn : "")
+          }
           onClick={() => setRunning(!isRunning)}
+          style={{ width: 220 }}
           disabled={victor !== undefined}
         >
           {isRunning ? "Stop Auto Battling" : "Auto Battle"}
@@ -97,7 +104,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           Perform Full Battle
         </button>
       </div>
-      <div style={{ flex: 1, overflowY: "hidden", display: "flex" }}>
+      <div style={{ flex: 1, overflow: "hidden", display: "flex" }}>
         <div style={{ height: "100%" }}>
           <RobotList robots={robots} status={status} />
         </div>
