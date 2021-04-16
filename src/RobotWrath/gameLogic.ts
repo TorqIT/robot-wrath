@@ -90,3 +90,15 @@ export function simulateGame(
 
   return currentEvents;
 }
+
+export function getVictor(status: RobotStatus[]): number | undefined {
+  const livingRobots = status.filter((s) => s.health > 0);
+
+  if (livingRobots.length > 1) {
+    return;
+  } else if (livingRobots.length == 1) {
+    return livingRobots[0].robotId;
+  } else {
+    return -1;
+  }
+}

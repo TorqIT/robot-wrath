@@ -17,7 +17,7 @@ const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
       <div ref={ref} className={styles.robotDisplay}>
         <div className={styles.internal}>
           <img
-            src={status.health > 0 ? robotImage : boomImage}
+            src={status.health > 0 ? robot.icon : boomImage}
             style={{ border: "6px solid " + robot.color }}
           />
           <div style={{ padding: 10 }}>

@@ -6,10 +6,12 @@ import {
   advance,
   generateCombatants,
   getStatus,
+  getVictor,
   simulateGame,
 } from "./gameLogic";
 import { EventList } from "./EventList";
 import styles from "./robotWrath.module.css";
+import { Victor } from "./RobotList/Victor";
 
 interface IProps {}
 
@@ -35,6 +37,16 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       return () => clearTimeout(timer);
     }
   }, [isRunning, events]);
+
+  const victor = (() => {
+    const victorId = getVictor(status);
+
+    if (victorId == -1) {
+      return null;
+    } else {
+      return robots.find((r) => r.id == victorId);
+    }
+  })();
 
   function performAdvance() {
     setEvents(events.concat([advance(robots, events)]));
@@ -66,21 +78,21 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         <button
           className={styles.niceButton}
           onClick={performAdvance}
-          disabled={status.filter((s) => s.health > 0).length <= 1}
+          disabled={victor !== undefined}
         >
           Advance
         </button>
         <button
           className={styles.niceButton}
           onClick={() => setRunning(!isRunning)}
-          disabled={status.filter((s) => s.health > 0).length <= 1}
+          disabled={victor !== undefined}
         >
           {isRunning ? "Stop Auto Battling" : "Auto Battle"}
         </button>
         <button
           className={styles.niceButton}
           onClick={() => setEvents(simulateGame(robots, events))}
-          disabled={status.filter((s) => s.health > 0).length <= 1}
+          disabled={victor !== undefined}
         >
           Perform Full Battle
         </button>
@@ -92,6 +104,9 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         <div style={{ height: "100%", marginLeft: 100 }}>
           <EventList robots={robots} events={events} />
         </div>
+      </div>
+      <div>
+        <Victor robot={victor} />
       </div>
     </div>
   );

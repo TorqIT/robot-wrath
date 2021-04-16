@@ -37,7 +37,7 @@
 
 .powerWrapper {
   font-size: 12px;
-  width: 100px;
+  width: 120px;
   display: flex;
   align-items: center;
 }
@@ -74,4 +74,15 @@
   z-index: 1;
   overflow: hidden;
   transition: 0.4s;
+}
+
+.victor {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #1c1142;
+  background-color: #f1e9ff;
+  border: 3px solid rgb(142, 142, 170);
+  border-top-color: rgb(205, 205, 230);
+  font-family: "Scifi";
 }

@@ -1,6 +1,7 @@
 export interface Robot {
   name: string;
   color: string;
+  icon: string;
   execute: (you: RobotStatus, robots: RobotStatus[]) => number | undefined;
 }
 
