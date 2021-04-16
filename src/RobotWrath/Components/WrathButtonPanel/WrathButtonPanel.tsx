@@ -6,6 +6,7 @@ interface IProps {
   onAdvance: () => void;
   onAutoBattle: () => void;
   onPerformFull: () => void;
+  onPerformMany: () => void;
   isRunning: boolean;
   hasVictor: boolean;
 }
@@ -15,6 +16,7 @@ const WrathButtonPanel: React.FC<IProps> = ({
   onAdvance,
   onAutoBattle,
   onPerformFull,
+  onPerformMany,
   isRunning,
   hasVictor,
 }) => {
@@ -42,6 +44,9 @@ const WrathButtonPanel: React.FC<IProps> = ({
       </button>
       <button className={styles.niceButton} onClick={onPerformFull}>
         Perform Full Battle
+      </button>
+      <button className={styles.niceButton} onClick={onPerformMany}>
+        Perform 10 Battles
       </button>
     </div>
   );

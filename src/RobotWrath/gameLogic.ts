@@ -118,10 +118,7 @@ export function advance(
     );
 }
 
-export function simulateGame(
-  robots: RobotCombatant[],
-  events: TurnEvent[][]
-): TurnEvent[][] {
+export function simulateGame(robots: RobotCombatant[], events: TurnEvent[][]) {
   let currentEvents = events.slice();
   let statuses = getStatus(robots, currentEvents);
 
@@ -134,7 +131,7 @@ export function simulateGame(
     turn++;
   }
 
-  return currentEvents;
+  return { events: currentEvents, victor: getVictor(statuses) };
 }
 
 export function getVictor(status: RobotStatus[]): number | undefined {

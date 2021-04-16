@@ -14,10 +14,9 @@ import {
   simulateGame,
 } from "./gameLogic";
 import { EventList } from "./Components/EventList";
-import styles from "./robotWrath.module.css";
 import { RobotList, Victor } from "./Components/RobotList";
-import { WrathButtonPanel } from "./Components/WrathButtonPanel/WrathButtonPanel";
 import { Leaderboard } from "./Components/Leaderboard";
+import { WrathButtonPanel } from "./Components/WrathButtonPanel";
 
 interface IProps {}
 
@@ -68,19 +67,22 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       return;
     }
 
-    const nextVictories = victories.map((v) => ({ ...v }));
-    const victoryLog = nextVictories.find(
-      (v) => v.robotStaticId == victor?.staticId
-    );
+    const nextVictories = addVictoryToLog(victor?.staticId, victories);
+    setVictories(nextVictories);
+  }, [victor]);
+
+  function addVictoryToLog(staticId: number | undefined, log: VictoryLog[]) {
+    const nextVictories = log.map((v) => ({ ...v }));
+    const victoryLog = nextVictories.find((v) => v.robotStaticId == staticId);
 
     if (victoryLog) {
       victoryLog.wins++;
     } else {
-      nextVictories.push({ robotStaticId: victor?.staticId, wins: 1 });
+      nextVictories.push({ robotStaticId: staticId, wins: 1 });
     }
 
-    setVictories(nextVictories);
-  }, [victor]);
+    return nextVictories;
+  }
 
   function performAdvance() {
     setEvents(events.concat([advance(robots, events)]));
@@ -112,12 +114,26 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         onAutoBattle={() => setRunning(!isRunning)}
         onPerformFull={() => {
           if (victor === undefined) {
-            setEvents(simulateGame(robots, events));
+            setEvents(simulateGame(robots, events).events);
           } else {
             const combatants = generateCombatants(robotEntrants);
             setRobots(combatants);
-            setEvents(simulateGame(combatants, []));
+            setEvents(simulateGame(combatants, []).events);
           }
+        }}
+        onPerformMany={() => {
+          let nextVictories = victories.map((v) => ({ ...v }));
+
+          for (let j = 0; j < 10; j++) {
+            const combatants = generateCombatants(robotEntrants);
+            const results = simulateGame(combatants, []);
+            nextVictories = addVictoryToLog(
+              combatants.find((r) => r.id == results.victor)?.staticId,
+              nextVictories
+            );
+          }
+
+          setVictories(nextVictories);
         }}
         hasVictor={victor !== undefined}
         isRunning={isRunning}
