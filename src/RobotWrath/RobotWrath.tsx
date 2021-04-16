@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { robots as submittedRobots } from "./robots";
-import { RobotCombatant, RobotEntrant, TurnEvent } from "./interfaces";
+import {
+  RobotCombatant,
+  RobotEntrant,
+  TurnEvent,
+  VictoryLog,
+} from "./interfaces";
 import {
   advance,
   generateCombatants,
@@ -12,6 +17,7 @@ import { EventList } from "./Components/EventList";
 import styles from "./robotWrath.module.css";
 import { RobotList, Victor } from "./Components/RobotList";
 import { WrathButtonPanel } from "./Components/WrathButtonPanel/WrathButtonPanel";
+import { Leaderboard } from "./Components/Leaderboard";
 
 interface IProps {}
 
@@ -32,6 +38,8 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   const status = useMemo(() => getStatus(robots, events), [robots, events]);
 
   const [isRunning, setRunning] = useState(false);
+
+  const [victories, setVictories] = useState<VictoryLog[]>([]);
 
   useEffect(() => {
     if (status.filter((s) => s.health > 0).length <= 1) {
@@ -54,6 +62,25 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       return robots.find((r) => r.id == victorId);
     }
   })();
+
+  useEffect(() => {
+    if (victor === undefined) {
+      return;
+    }
+
+    const nextVictories = victories.map((v) => ({ ...v }));
+    const victoryLog = nextVictories.find(
+      (v) => v.robotStaticId == victor?.staticId
+    );
+
+    if (victoryLog) {
+      victoryLog.wins++;
+    } else {
+      nextVictories.push({ robotStaticId: victor?.staticId, wins: 1 });
+    }
+
+    setVictories(nextVictories);
+  }, [victor]);
 
   function performAdvance() {
     setEvents(events.concat([advance(robots, events)]));
@@ -102,6 +129,9 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         </div>
         <div style={{ height: "100%", marginLeft: 100 }}>
           <EventList robots={robots} events={events} />
+        </div>
+        <div style={{ height: "100%", marginLeft: 50 }}>
+          <Leaderboard robots={robots} records={victories} />
         </div>
       </div>
       <div>

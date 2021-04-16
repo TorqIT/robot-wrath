@@ -1,0 +1,8 @@
+.leaderboardEntry {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  background-color: #f1e9ff;
+  padding: 10px;
+  font-family: "Scifi";
+}

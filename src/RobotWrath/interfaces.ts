@@ -35,3 +35,8 @@ export interface TurnEvent {
 export interface MemoryMap {
   [robotId: number]: any;
 }
+
+export interface VictoryLog {
+  robotStaticId?: number;
+  wins: number;
+}
