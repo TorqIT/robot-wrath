@@ -93,8 +93,8 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   return (
     <div
       style={{
-        width: "calc(100vw - 400px)",
         height: "calc(100vh - 100px)",
+        minHeight: 900,
         padding: "50px 200px",
         backgroundColor: "#bfbfde",
         display: "flex",
@@ -145,8 +145,19 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         <div style={{ height: "100%", marginRight: 30 }}>
           <About />
         </div>
-        <div style={{ height: "100%" }}>
-          <RobotList robots={robots} status={status} />
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ flex: 1, overflowY: "hidden" }}>
+            <RobotList robots={robots} status={status} />
+          </div>
+
+          <Victor robot={victor} />
         </div>
         <div className={styles.sidePanel}>
           <h1>Events</h1>
@@ -158,9 +169,6 @@ const RobotWrath: React.FC<IProps> = ({}) => {
             <Leaderboard robots={robots} records={victories} />
           </div>
         </div>
-      </div>
-      <div>
-        <Victor robot={victor} />
       </div>
     </div>
   );

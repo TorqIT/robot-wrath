@@ -19,7 +19,7 @@ const Victor: React.FC<IProps> = ({ robot }) => {
 
   function getText() {
     if (internalBot != null) {
-      return internalBot.name + " emerges the victor!";
+      return internalBot.name + " wins!";
     } else {
       return "No one wins!!!";
     }
