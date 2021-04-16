@@ -10,7 +10,14 @@ interface IProps {
 
 const Leaderboard: React.FC<IProps> = ({ robots, records }) => {
   return (
-    <div style={{ height: "100%" }}>
+    <div
+      style={{
+        height: "100%",
+        overflowY: "scroll",
+        backgroundColor: "white",
+        width: 337,
+      }}
+    >
       <FlipMove>
         {records
           .sort((a, b) => b.wins - a.wins)

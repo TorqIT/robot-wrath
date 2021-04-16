@@ -12,3 +12,8 @@
   font-family: "Health";
   src: url("./RobotWrath/Fonts/911porschav3.ttf");
 }
+
+@font-face {
+  font-family: "Title";
+  src: url("./RobotWrath/Fonts/DreamMMA.ttf");
+}

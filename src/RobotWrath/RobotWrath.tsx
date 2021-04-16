@@ -17,6 +17,8 @@ import { EventList } from "./Components/EventList";
 import { RobotList, Victor } from "./Components/RobotList";
 import { Leaderboard } from "./Components/Leaderboard";
 import { WrathButtonPanel } from "./Components/WrathButtonPanel";
+import styles from "./robotWrath.module.css";
+import { About } from "./About";
 
 interface IProps {}
 
@@ -140,14 +142,21 @@ const RobotWrath: React.FC<IProps> = ({}) => {
       />
 
       <div style={{ flex: 1, overflow: "hidden", display: "flex" }}>
+        <div style={{ height: "100%", marginRight: 30 }}>
+          <About />
+        </div>
         <div style={{ height: "100%" }}>
           <RobotList robots={robots} status={status} />
         </div>
-        <div style={{ height: "100%", marginLeft: 100 }}>
-          <EventList robots={robots} events={events} />
-        </div>
-        <div style={{ height: "100%", marginLeft: 50 }}>
-          <Leaderboard robots={robots} records={victories} />
+        <div className={styles.sidePanel}>
+          <h1>Events</h1>
+          <div style={{ flex: 1, overflowY: "hidden" }}>
+            <EventList robots={robots} events={events} />
+          </div>
+          <h1>Leaderboard</h1>
+          <div style={{ flex: 1, overflowY: "hidden" }}>
+            <Leaderboard robots={robots} records={victories} />
+          </div>
         </div>
       </div>
       <div>

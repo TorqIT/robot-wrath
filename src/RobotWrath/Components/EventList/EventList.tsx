@@ -25,10 +25,12 @@ const EventList: React.FC<IProps> = ({ robots, events }) => {
     >
       {events.map((turnEvents, index) => (
         <div key={index}>
+          <div>--</div>
+          <div>TURN {index + 1}</div>
+          <div>--</div>
           {turnEvents.map((event, index) => (
             <EventDisplay key={index} robots={robots} event={event} />
           ))}
-          <div>--</div>
         </div>
       ))}
       <div ref={ref}></div>

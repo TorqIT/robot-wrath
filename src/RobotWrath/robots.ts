@@ -4,6 +4,6 @@ import { ohm } from "./robots/ohm";
 import { rando } from "./robots/rando";
 import { vengeance } from "./robots/vengeance";
 
-const robots: Robot<any>[] = [rando(), rando(), rando(), ohm, bomb, vengeance];
+const robots: Robot<any>[] = [rando, ohm, bomb, vengeance];
 
 export { robots };

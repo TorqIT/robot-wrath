@@ -26,10 +26,11 @@ const vengeance: Robot<Memory> = {
     );
 
     if (memory.attackers.some((r) => r.attacks > 0)) {
-      const mostFrequentAttacker = memory.attackers.reduce(
-        (primeTarget, current) =>
+      const mostFrequentAttacker = memory.attackers
+        .filter((r) => robots.some((liveRobot) => liveRobot.robotId == r.id))
+        .reduce((primeTarget, current) =>
           current.attacks > primeTarget.attacks ? current : primeTarget
-      );
+        );
       return mostFrequentAttacker.id;
     }
   },
