@@ -9,6 +9,9 @@ import {
   TurnEvent,
 } from "./interfaces";
 
+const SUDDEN_DEATH = 1000;
+const SUDDEN_DEATH_DAMAGE_PER_TURN = 25;
+
 export function generateCombatants(robots: RobotEntrant[]): RobotCombatant[] {
   return arrayShuffle(robots).map((r, index) => ({ ...r, id: index + 1 }));
 }
@@ -25,8 +28,8 @@ export function getStatus(
     })
   );
 
-  events.forEach((e) => {
-    state = applyEvents(state, e);
+  events.forEach((e, index) => {
+    state = applyEvents(state, e, index > SUDDEN_DEATH);
   });
 
   return state;
@@ -34,7 +37,8 @@ export function getStatus(
 
 function applyEvents(
   robots: RobotStatus[],
-  events: TurnEvent[]
+  events: TurnEvent[],
+  suddenDeath: boolean
 ): RobotStatus[] {
   return robots.map((r) => {
     if (r.health <= 0) {
@@ -44,19 +48,20 @@ function applyEvents(
     const selfAction = events.find((e) => e.robotId == r.robotId)!;
     const eventsTargettingSelf = events.filter((e) => e.target == r.robotId);
 
-    let healthChange = eventsTargettingSelf.reduce(
+    const healthChange = eventsTargettingSelf.reduce(
       (acc, current) =>
         acc -
         robots.find((attacker) => attacker.robotId == current.robotId)!.power,
       0
     );
-    let powerChange = eventsTargettingSelf.length;
+    const powerChange = eventsTargettingSelf.length;
 
     return {
       robotId: r.robotId,
       health:
         r.health +
-        (selfAction.target ? healthChange : Math.floor(healthChange / 2)),
+        (selfAction.target ? healthChange : Math.floor(healthChange / 2)) -
+        (suddenDeath ? SUDDEN_DEATH_DAMAGE_PER_TURN : 0),
       power: Math.max(
         r.power + (selfAction.target ? powerChange : powerChange * 2 - 1),
         1
@@ -120,10 +125,13 @@ export function simulateGame(
   let currentEvents = events.slice();
   let statuses = getStatus(robots, currentEvents);
 
+  let turn = 0;
+
   while (statuses.filter((s) => s.health > 0).length > 1) {
     const nextEvents = advance(robots, currentEvents);
-    statuses = applyEvents(statuses, nextEvents);
+    statuses = applyEvents(statuses, nextEvents, turn > SUDDEN_DEATH);
     currentEvents = currentEvents.concat([nextEvents]);
+    turn++;
   }
 
   return currentEvents;
@@ -134,9 +142,9 @@ export function getVictor(status: RobotStatus[]): number | undefined {
 
   if (livingRobots.length > 1) {
     return;
-  } else if (livingRobots.length == 1) {
-    return livingRobots[0].robotId;
-  } else {
-    return -1;
   }
+  if (livingRobots.length == 1) {
+    return livingRobots[0].robotId;
+  }
+  return -1;
 }

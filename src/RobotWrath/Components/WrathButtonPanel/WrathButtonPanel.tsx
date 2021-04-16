@@ -25,7 +25,7 @@ const WrathButtonPanel: React.FC<IProps> = ({
       </button>
       <button
         className={styles.niceButton}
-        onClick={onAutoBattle}
+        onClick={onAdvance}
         disabled={hasVictor}
       >
         Advance
