@@ -71,6 +71,7 @@ export function advance(
       (r): TurnEvent => {
         let target: number | undefined = undefined;
 
+        const start = performance.now();
         try {
           target = r.execute(
             livingRobotStatuses.find((s) => s.robotId == r.id)!,
@@ -79,8 +80,9 @@ export function advance(
         } catch (e) {
           target = r.id;
         }
+        const end = performance.now();
 
-        return { robotId: r.id, target };
+        return { robotId: r.id, target, executionTime: Math.ceil(end - start) };
       }
     );
 }

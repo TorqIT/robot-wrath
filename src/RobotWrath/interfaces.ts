@@ -19,4 +19,5 @@ export interface RobotStatus {
 export interface TurnEvent {
   robotId: number;
   target?: number;
+  executionTime: number;
 }

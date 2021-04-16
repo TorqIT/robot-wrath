@@ -16,10 +16,16 @@ const EventDisplay: React.FC<IProps> = ({ robots, event }) => {
       <div>
         {find(event.robotId).name} attacked{" "}
         {event.target == event.robotId ? "ITSELF" : find(event.target).name}!
+        <i style={{ fontSize: 11 }}> ({event.executionTime}ms)</i>
       </div>
     );
   } else {
-    return <div>{find(event.robotId).name} blocked!</div>;
+    return (
+      <div>
+        {find(event.robotId).name} blocked!
+        <i style={{ fontSize: 11 }}> ({event.executionTime}ms)</i>
+      </div>
+    );
   }
 };
 
