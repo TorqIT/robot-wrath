@@ -14,7 +14,8 @@ const EventDisplay: React.FC<IProps> = ({ robots, event }) => {
   if (event.target) {
     return (
       <div>
-        {find(event.robotId).name} attacked {find(event.target).name}!
+        {find(event.robotId).name} attacked{" "}
+        {event.target == event.robotId ? "ITSELF" : find(event.target).name}!
       </div>
     );
   } else {

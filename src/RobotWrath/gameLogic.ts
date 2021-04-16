@@ -50,7 +50,10 @@ function applyEvents(
       health:
         r.health +
         (selfAction.target ? healthChange : Math.floor(healthChange / 2)),
-      power: r.power + (selfAction.target ? powerChange : powerChange * 2 - 1),
+      power: Math.max(
+        r.power + (selfAction.target ? powerChange : powerChange * 2 - 1),
+        1
+      ),
     };
   });
 }
@@ -65,13 +68,20 @@ export function advance(
   return robots
     .filter((r) => livingRobotStatuses.some((s) => s.robotId == r.id))
     .map(
-      (r): TurnEvent => ({
-        robotId: r.id,
-        target: r.execute(
-          livingRobotStatuses.find((s) => s.robotId == r.id)!,
-          livingRobotStatuses.filter((s) => s.robotId != r.id)
-        ),
-      })
+      (r): TurnEvent => {
+        let target: number | undefined = undefined;
+
+        try {
+          target = r.execute(
+            livingRobotStatuses.find((s) => s.robotId == r.id)!,
+            livingRobotStatuses.filter((s) => s.robotId != r.id)
+          );
+        } catch (e) {
+          target = r.id;
+        }
+
+        return { robotId: r.id, target };
+      }
     );
 }
 

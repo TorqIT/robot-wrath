@@ -7,6 +7,10 @@ export function rando(): Robot {
     color: "#f33",
     icon: robotIcons.robot,
     execute: (you, robots) => {
+      if (Math.random() < 0.1) {
+        throw new Error("ERROR!!!");
+      }
+
       if (Math.random() > 0.2) {
         return robots[Math.floor(Math.random() * robots.length)].robotId;
       }
