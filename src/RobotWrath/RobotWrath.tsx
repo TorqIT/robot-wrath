@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { RobotList } from "./RobotList/RobotList";
 import { robots as submittedRobots } from "./robots";
-import { RobotCombatant, TurnEvent } from "./interfaces";
+import { RobotCombatant, RobotEntrant, TurnEvent } from "./interfaces";
 import {
   advance,
   generateCombatants,
@@ -15,9 +15,16 @@ import { Victor } from "./RobotList/Victor";
 
 interface IProps {}
 
+const robotEntrants = submittedRobots.map(
+  (r, index): RobotEntrant => ({
+    ...r,
+    staticId: index + 1000, //just to make it obvious
+  })
+);
+
 const RobotWrath: React.FC<IProps> = ({}) => {
   const [robots, setRobots] = useState<RobotCombatant[]>(
-    generateCombatants(submittedRobots)
+    generateCombatants(robotEntrants)
   );
 
   const [events, setEvents] = useState<TurnEvent[][]>([]);
@@ -69,7 +76,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         <button
           className={styles.niceButton}
           onClick={() => {
-            setRobots(generateCombatants(submittedRobots));
+            setRobots(generateCombatants(robotEntrants));
             setRunning(false);
             setEvents([]);
           }}
@@ -98,8 +105,15 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         </button>
         <button
           className={styles.niceButton}
-          onClick={() => setEvents(simulateGame(robots, events))}
-          disabled={victor !== undefined}
+          onClick={() => {
+            if (victor === undefined) {
+              setEvents(simulateGame(robots, events));
+            } else {
+              const combatants = generateCombatants(robotEntrants);
+              setRobots(combatants);
+              setEvents(simulateGame(combatants, []));
+            }
+          }}
         >
           Perform Full Battle
         </button>

@@ -10,7 +10,11 @@ export interface Robot<Memory extends object> {
   ) => number | undefined;
 }
 
-export interface RobotCombatant extends Robot<any> {
+export interface RobotEntrant extends Robot<any> {
+  staticId: number;
+}
+
+export interface RobotCombatant extends RobotEntrant {
   id: number;
 }
 

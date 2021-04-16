@@ -1,9 +1,15 @@
 import arrayShuffle from "array-shuffle";
 import cloneDeep from "clone-deep";
 import { stat } from "fs";
-import { Robot, RobotCombatant, RobotStatus, TurnEvent } from "./interfaces";
+import {
+  Robot,
+  RobotCombatant,
+  RobotEntrant,
+  RobotStatus,
+  TurnEvent,
+} from "./interfaces";
 
-export function generateCombatants(robots: Robot<any>[]): RobotCombatant[] {
+export function generateCombatants(robots: RobotEntrant[]): RobotCombatant[] {
   return arrayShuffle(robots).map((r, index) => ({ ...r, id: index + 1 }));
 }
 
