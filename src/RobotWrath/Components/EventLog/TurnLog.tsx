@@ -45,7 +45,7 @@ const TurnLog: React.FC<IProps> = ({
     }, [] as RobotActionProps[]);
 
   function getClass() {
-    if (!displayTurn || displayTurn > turn) {
+    if (displayTurn === undefined || displayTurn > turn) {
       return "";
     } else if (displayTurn == turn) {
       return "selected";

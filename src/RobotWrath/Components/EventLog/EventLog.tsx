@@ -28,7 +28,7 @@ const EventLog: React.FC<IProps> = ({
         <TurnLog
           key={index}
           turn={index + 1}
-          displayTurn={displayTurn ? displayTurn + 1 : undefined}
+          displayTurn={displayTurn !== undefined ? displayTurn + 1 : undefined}
           robots={robots}
           events={turnEvents}
           onClick={() => onTurnSelect(index)}

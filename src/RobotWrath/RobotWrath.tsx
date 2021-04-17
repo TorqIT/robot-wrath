@@ -16,7 +16,7 @@ import {
 } from "./gameLogic";
 import { RobotList, Victor } from "./Components/RobotList";
 import { Leaderboard } from "./Components/Leaderboard";
-import { WrathButtonPanel } from "./Components/WrathButtonPanel";
+import { NiceButton, WrathButtonPanel } from "./Components/WrathButtonPanel";
 import styles from "./robotWrath.module.css";
 import { About } from "./About";
 import { EventLog } from "./Components/EventLog";
@@ -110,6 +110,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   }
 
   function performAdvance() {
+    setDisplayTurn(undefined);
     setEvents(events.concat([advance(robots, events)]));
   }
 
@@ -120,6 +121,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           setRobots(generateCombatants(robotEntrants));
           setRunning(false);
           setEvents([]);
+          setDisplayTurn(undefined);
         }}
         onAdvance={() => {
           performAdvance();
@@ -127,6 +129,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         }}
         onAutoBattle={() => setRunning(!isRunning)}
         onPerformFull={() => {
+          setDisplayTurn(undefined);
           if (victor === undefined) {
             setEvents(simulateGame(robots, events).events);
           } else {
@@ -182,8 +185,23 @@ const RobotWrath: React.FC<IProps> = ({}) => {
               robots={robots}
               events={events}
               displayTurn={displayTurn}
-              onTurnSelect={(turn) => setDisplayTurn(turn)}
+              onTurnSelect={(turn) => {
+                setDisplayTurn(turn == events.length - 1 ? undefined : turn);
+              }}
             />
+          </div>
+          <div
+            className={styles.simulationPanel}
+            style={{
+              height: displayTurn !== undefined ? 60 : 0,
+              textAlign: "center",
+            }}
+          >
+            <p>
+              <NiceButton onClick={() => setDisplayTurn(undefined)}>
+                Back To Current Turn
+              </NiceButton>
+            </p>
           </div>
           <h1>Leaderboard</h1>
           <div
