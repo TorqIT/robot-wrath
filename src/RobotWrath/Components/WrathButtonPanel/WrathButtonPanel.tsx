@@ -37,7 +37,7 @@ const WrathButtonPanel: React.FC<IProps> = ({
           styles.niceButton + (isRunning ? " " + styles.pressedIn : "")
         }
         onClick={onAutoBattle}
-        style={{ width: 220 }}
+        style={{ width: 290 }}
         disabled={hasVictor}
       >
         {isRunning ? "Stop Auto Battling" : "Auto Battle"}
