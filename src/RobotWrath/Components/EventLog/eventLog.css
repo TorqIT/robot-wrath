@@ -1,0 +1,68 @@
+.eventLog {
+  height: 100%;
+  width: 500px;
+  background-color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.turnLog {
+  padding: 10px;
+  background-color: #ece2fd;
+  border: 3px solid rgb(142, 142, 170);
+  border-top-color: rgb(205, 205, 230);
+  font-family: "Scifi";
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.turnLog:hover {
+  background-color: #f3ebff;
+}
+
+.turnLog:hover:active {
+  background-color: #ffffff;
+}
+
+.turnLog.selected {
+  background-color: #f6f1ff;
+}
+
+.turnLog.disabled {
+  background-color: #84808b;
+  color: #646268;
+  border: 3px solid rgb(78, 78, 88);
+  border-top-color: rgb(137, 137, 155);
+}
+
+.turnLog.disabled:hover {
+  background-color: #b4afbd;
+  color: #555458;
+}
+
+.turnLog.disabled:hover:active {
+  background-color: #d4cfdd;
+  color: #3e3d41;
+}
+
+.robotAction {
+  padding: 5px;
+  background-color: #faf7ff;
+  border: 3px solid rgb(158, 158, 189);
+  border-top-color: rgb(213, 213, 233);
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.turnLog.disabled .robotAction {
+  opacity: 0.3;
+  background-color: #58565c;
+  border: 3px solid rgb(78, 78, 88);
+  border-top-color: rgb(137, 137, 155);
+}
+
+.turnLog.disabled:hover .robotAction {
+  opacity: 0.5;
+}

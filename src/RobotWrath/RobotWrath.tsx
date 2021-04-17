@@ -37,7 +37,17 @@ const RobotWrath: React.FC<IProps> = ({}) => {
 
   const [events, setEvents] = useState<TurnEvent[][]>([]);
 
+  const [displayTurn, setDisplayTurn] = useState<number>();
+
   const status = useMemo(() => getStatus(robots, events), [robots, events]);
+
+  const displayStatus = useMemo(
+    () =>
+      displayTurn !== undefined
+        ? getStatus(robots, events.slice(0, displayTurn + 1))
+        : status,
+    [robots, events, displayTurn]
+  );
 
   const [isRunning, setRunning] = useState(false);
 
@@ -160,7 +170,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           }}
         >
           <div style={{ flex: 1, overflowY: "hidden" }}>
-            <RobotList robots={robots} status={status} />
+            <RobotList robots={robots} status={displayStatus} />
           </div>
 
           <Victor robot={victor} />
@@ -168,7 +178,12 @@ const RobotWrath: React.FC<IProps> = ({}) => {
         <div className={styles.sidePanel}>
           <h1 style={{ marginTop: 0 }}>Events</h1>
           <div style={{ flex: 1, overflowY: "hidden" }}>
-            <EventLog robots={robots} events={events} />
+            <EventLog
+              robots={robots}
+              events={events}
+              displayTurn={displayTurn}
+              onTurnSelect={(turn) => setDisplayTurn(turn)}
+            />
           </div>
           <h1>Leaderboard</h1>
           <div

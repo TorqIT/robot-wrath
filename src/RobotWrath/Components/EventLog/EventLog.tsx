@@ -1,14 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import { RobotCombatant, TurnEvent } from "../../interfaces";
-import styles from "./eventLog.module.css";
+import "./eventLog.css";
 import { TurnLog } from "./TurnLog";
 
 interface IProps {
   robots: RobotCombatant[];
   events: TurnEvent[][];
+  displayTurn?: number;
+  onTurnSelect: (turn: number) => void;
 }
 
-const EventLog: React.FC<IProps> = ({ robots, events }) => {
+const EventLog: React.FC<IProps> = ({
+  robots,
+  events,
+  displayTurn,
+  onTurnSelect,
+}) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,13 +23,15 @@ const EventLog: React.FC<IProps> = ({ robots, events }) => {
   }, [events]);
 
   return (
-    <div className={styles.eventLog}>
+    <div className="eventLog">
       {events.map((turnEvents, index) => (
         <TurnLog
           key={index}
           turn={index + 1}
+          displayTurn={displayTurn ? displayTurn + 1 : undefined}
           robots={robots}
           events={turnEvents}
+          onClick={() => onTurnSelect(index)}
         />
       ))}
       <div ref={scrollRef}></div>

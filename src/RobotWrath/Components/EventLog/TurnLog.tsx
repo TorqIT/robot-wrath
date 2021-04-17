@@ -1,15 +1,23 @@
 import React from "react";
 import { RobotCombatant, TurnEvent } from "../../interfaces";
-import styles from "./eventLog.module.css";
+import "./eventLog.css";
 import { RobotAction, RobotActionProps } from "./RobotAction";
 
 interface IProps {
   robots: RobotCombatant[];
   events: TurnEvent[];
   turn: number;
+  displayTurn?: number;
+  onClick: () => void;
 }
 
-const TurnLog: React.FC<IProps> = ({ robots, events, turn }) => {
+const TurnLog: React.FC<IProps> = ({
+  robots,
+  events,
+  turn,
+  displayTurn,
+  onClick,
+}) => {
   function get(id: number) {
     return robots.find((r) => r.id == id)!;
   }
@@ -36,8 +44,18 @@ const TurnLog: React.FC<IProps> = ({ robots, events, turn }) => {
       return robotActions;
     }, [] as RobotActionProps[]);
 
+  function getClass() {
+    if (!displayTurn || displayTurn > turn) {
+      return "";
+    } else if (displayTurn == turn) {
+      return "selected";
+    } else {
+      return "disabled";
+    }
+  }
+
   return (
-    <div className={styles.turnLog}>
+    <div className={"turnLog" + " " + getClass()} onClick={onClick}>
       <div style={{ textAlign: "center", marginBottom: 10 }}>TURN {turn}</div>
       {robotsBlockingNothing.map((e) => (
         <RobotAction
