@@ -46,7 +46,7 @@ const WrathButtonPanel: React.FC<IProps> = ({
         Perform Full Battle
       </button>
       <button className={styles.niceButton} onClick={onPerformMany}>
-        Perform 10 Battles
+        Perform 100 Battles
       </button>
     </div>
   );

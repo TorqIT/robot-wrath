@@ -33,3 +33,20 @@
   margin: 20px 0px 5px;
   font-size: 24px;
 }
+
+.simulationPanel {
+  transition: 0.4s;
+  overflow-y: hidden;
+  font-family: "Scifi";
+  width: 100%;
+}
+
+.simulationPanel div {
+  padding: 10px;
+  background-color: #f1e9ff;
+  border: 3px solid rgb(142, 142, 170);
+  border-top-color: rgb(205, 205, 230);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -12,6 +12,7 @@ import {
   getStatus,
   getVictor,
   simulateGame,
+  sleep,
 } from "./gameLogic";
 import { RobotList, Victor } from "./Components/RobotList";
 import { Leaderboard } from "./Components/Leaderboard";
@@ -41,6 +42,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   const [isRunning, setRunning] = useState(false);
 
   const [victories, setVictories] = useState<VictoryLog[]>([]);
+  const [currentSimulation, setCurrentSimulation] = useState<number>();
 
   useEffect(() => {
     if (status.filter((s) => s.health > 0).length <= 1) {
@@ -123,19 +125,23 @@ const RobotWrath: React.FC<IProps> = ({}) => {
             setEvents(simulateGame(combatants, []).events);
           }
         }}
-        onPerformMany={() => {
+        onPerformMany={async () => {
           let nextVictories = victories.map((v) => ({ ...v }));
 
-          for (let j = 0; j < 10; j++) {
+          for (let j = 0; j < 100; j++) {
+            setCurrentSimulation(j + 1);
             const combatants = generateCombatants(robotEntrants);
             const results = simulateGame(combatants, []);
             nextVictories = addVictoryToLog(
               combatants.find((r) => r.id == results.victor)?.staticId,
               nextVictories
             );
+            setVictories(nextVictories);
+
+            await sleep(10);
           }
 
-          setVictories(nextVictories);
+          setCurrentSimulation(undefined);
         }}
         hasVictor={victor !== undefined}
         isRunning={isRunning}
@@ -165,6 +171,18 @@ const RobotWrath: React.FC<IProps> = ({}) => {
             <EventLog robots={robots} events={events} />
           </div>
           <h1>Leaderboard</h1>
+          <div
+            className={styles.simulationPanel}
+            style={{
+              height: currentSimulation ? 60 : 0,
+            }}
+          >
+            <div>
+              {currentSimulation
+                ? "Simulating battle #" + currentSimulation
+                : "Done!"}
+            </div>
+          </div>
           <div style={{ flex: 1, overflowY: "hidden" }}>
             <Leaderboard robots={robots} records={victories} />
           </div>

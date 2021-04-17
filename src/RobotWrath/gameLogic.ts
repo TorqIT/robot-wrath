@@ -145,3 +145,7 @@ export function getVictor(status: RobotStatus[]): number | undefined {
   }
   return -1;
 }
+
+export async function sleep(millis: number) {
+  return new Promise((resolve) => setTimeout(resolve, millis));
+}
