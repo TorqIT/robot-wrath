@@ -23,7 +23,7 @@ const Leaderboard: React.FC<IProps> = ({ robots, records }) => {
           .sort((a, b) => b.wins - a.wins)
           .map((vl) => (
             <LeaderboardEntry
-              key={vl.robotStaticId}
+              key={vl.robotStaticId ?? -1}
               robot={robots.find((r) => r.staticId == vl.robotStaticId)}
               wins={vl.wins}
             />

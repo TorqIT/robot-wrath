@@ -5,6 +5,7 @@ const ohm: Robot<{}> = {
   name: "Ohm",
   color: "#ff3",
   icon: robotIcons.robot,
+  author: "Nick",
   init: () => ({}),
   execute: (you, robots) => {
     return robots.reduce((highest, current) =>

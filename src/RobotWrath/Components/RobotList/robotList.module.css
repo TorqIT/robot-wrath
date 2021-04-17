@@ -5,12 +5,23 @@
 }
 
 .robotDisplay {
+  position: relative;
   width: 620px;
   padding: 5px;
   background-color: #f1e9ff;
   border: 3px solid rgb(142, 142, 170);
   border-top-color: rgb(205, 205, 230);
   font-family: "Scifi";
+}
+
+.author {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  font-family: "Author";
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .internal {

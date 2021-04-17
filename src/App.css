@@ -17,3 +17,8 @@
   font-family: "Title";
   src: url("./RobotWrath/Fonts/DreamMMA.ttf");
 }
+
+@font-face {
+  font-family: "Author";
+  src: url("./RobotWrath/Fonts/RetroGaming.ttf");
+}

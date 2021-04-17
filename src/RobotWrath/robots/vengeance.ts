@@ -9,6 +9,7 @@ const vengeance: Robot<Memory> = {
   name: "Vengeance",
   color: "#50A",
   icon: robotIcons.robot,
+  author: "Nick",
   init: (yourId, robotIds) => {
     return {
       attackers: robotIds.map((r) => ({

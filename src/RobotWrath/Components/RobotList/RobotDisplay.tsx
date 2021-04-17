@@ -16,6 +16,10 @@ const RobotDisplay: React.FC<IProps> = forwardRef<HTMLDivElement, IProps>(
 
     return (
       <div ref={ref} className={styles.robotDisplay}>
+        <div className={styles.author}>
+          <div style={{ marginRight: 2 }}>🛠</div>{" "}
+          <div style={{ marginTop: 3 }}>{robot.author}</div>
+        </div>
         <div className={styles.internal}>
           <RobotIcon robot={robot} boom={status.health <= 0} />
           <div style={{ padding: 10 }}>

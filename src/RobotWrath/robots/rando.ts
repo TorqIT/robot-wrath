@@ -5,6 +5,7 @@ const rando: Robot<{}> = {
   name: "Rando",
   color: "#f33",
   icon: robotIcons.robot,
+  author: "Nick",
   init: () => ({}),
   execute: (you, robots) => {
     if (Math.random() > 0.2) {

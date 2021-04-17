@@ -2,6 +2,7 @@ export interface Robot<Memory extends object> {
   name: string;
   color: string;
   icon: string;
+  author: string;
   init: (you: number, robots: number[]) => Memory;
   execute: (
     you: RobotStatus,
