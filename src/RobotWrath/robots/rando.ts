@@ -5,6 +5,7 @@ const rando: Robot<{}> = {
   name: "Rando",
   color: "#f33",
   icon: robotIcons.default,
+  hue: 180,
   author: "Nick",
   init: () => ({}),
   execute: (you, robots) => {

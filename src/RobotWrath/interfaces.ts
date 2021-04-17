@@ -2,6 +2,8 @@ export interface Robot<Memory extends object> {
   name: string;
   color: string;
   icon: string;
+  /** Should be a value between 0 and 360 */
+  hue?: number;
   author: string;
   /** Initializes your memory based on your ID and the IDs of all your enemies.
    * Enemies always start with 1000 health and 10 power. Memory only lasts for the current

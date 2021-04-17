@@ -11,8 +11,7 @@ interface IProps {
 
 const RobotIcon: React.FC<IProps> = ({ robot, boom, small, style }) => {
   return (
-    <img
-      src={robot && !boom ? robot.icon : boomIcon}
+    <div
       style={{
         ...style,
         borderWidth: small ? 3 : 6,
@@ -21,8 +20,18 @@ const RobotIcon: React.FC<IProps> = ({ robot, boom, small, style }) => {
         width: small ? 40 : 90,
         height: small ? 40 : 90,
       }}
-      title={robot?.name ?? "BOOM"}
-    />
+    >
+      <img
+        src={robot && !boom ? robot.icon : boomIcon}
+        style={{
+          width: small ? 40 : 90,
+          height: small ? 40 : 90,
+          filter:
+            "hue-rotate(" + (robot?.hue && !boom ? robot.hue : 0) + "deg)",
+        }}
+        title={robot?.name ?? "BOOM"}
+      />
+    </div>
   );
 };
 
