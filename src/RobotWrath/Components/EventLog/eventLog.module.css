@@ -1,0 +1,26 @@
+.eventLog {
+  height: 100%;
+  width: 500px;
+  background-color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.turnLog {
+  padding: 10px;
+  background-color: #ece2fd;
+  border: 3px solid rgb(142, 142, 170);
+  border-top-color: rgb(205, 205, 230);
+  font-family: "Scifi";
+  font-size: 20px;
+}
+
+.robotAction {
+  padding: 5px;
+  background-color: #faf7ff;
+  border: 3px solid rgb(158, 158, 189);
+  border-top-color: rgb(213, 213, 233);
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}

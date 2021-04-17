@@ -13,9 +13,9 @@ const Leaderboard: React.FC<IProps> = ({ robots, records }) => {
     <div
       style={{
         height: "100%",
-        overflowY: "scroll",
+        overflowY: "auto",
         backgroundColor: "white",
-        width: 337,
+        width: 500,
       }}
     >
       <FlipMove>

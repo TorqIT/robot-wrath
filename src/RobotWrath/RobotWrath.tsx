@@ -13,12 +13,12 @@ import {
   getVictor,
   simulateGame,
 } from "./gameLogic";
-import { EventList } from "./Components/EventList";
 import { RobotList, Victor } from "./Components/RobotList";
 import { Leaderboard } from "./Components/Leaderboard";
 import { WrathButtonPanel } from "./Components/WrathButtonPanel";
 import styles from "./robotWrath.module.css";
 import { About } from "./About";
+import { EventLog } from "./Components/EventLog";
 
 interface IProps {}
 
@@ -64,11 +64,22 @@ const RobotWrath: React.FC<IProps> = ({}) => {
     }
   })();
 
+  //This looks like it shouldn't work in cases where performing full battles
+  // resulting in the same victor (rando wins -> rando wins = no change), but
+  // it actually DOES still work since the RobotCombatant objects are
+  // different between games. That said, this feature will break if any sort
+  // of alternate timeline functionality happens (reversing a game and
+  // continuing from a midpoint).
   useEffect(() => {
     if (victor === undefined) {
       return;
     }
 
+    //An alternative way to do this would be to store entire previous game
+    // sessions in the state, then evaluating at render (probably memoized)
+    // how many wins there have been, but then that object is going to get
+    // very huge, very fast, and parsing it would really take some time
+    // as well
     const nextVictories = addVictoryToLog(victor?.staticId, victories);
     setVictories(nextVictories);
   }, [victor]);
@@ -91,18 +102,7 @@ const RobotWrath: React.FC<IProps> = ({}) => {
   }
 
   return (
-    <div
-      style={{
-        height: "calc(100vh - 100px)",
-        minHeight: 900,
-        padding: "50px 200px",
-        backgroundColor: "#bfbfde",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className={styles.main}>
       <WrathButtonPanel
         onReset={() => {
           setRobots(generateCombatants(robotEntrants));
@@ -160,9 +160,9 @@ const RobotWrath: React.FC<IProps> = ({}) => {
           <Victor robot={victor} />
         </div>
         <div className={styles.sidePanel}>
-          <h1>Events</h1>
+          <h1 style={{ marginTop: 0 }}>Events</h1>
           <div style={{ flex: 1, overflowY: "hidden" }}>
-            <EventList robots={robots} events={events} />
+            <EventLog robots={robots} events={events} />
           </div>
           <h1>Leaderboard</h1>
           <div style={{ flex: 1, overflowY: "hidden" }}>
