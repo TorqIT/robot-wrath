@@ -4,7 +4,7 @@ import { Robot } from "../interfaces";
 const bomb: Robot<{}> = {
   name: "Bomb Bot",
   color: "#0b0a1c",
-  icon: robotIcons.robot,
+  icon: robotIcons.default,
   author: "Nick",
   init: () => ({}),
   execute: (you, robots) => {

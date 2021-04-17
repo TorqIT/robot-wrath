@@ -1,7 +1,7 @@
-import robot from "./robot.png";
+import defaultIcon from "./robot.png";
 
 const robotIcons = {
-  robot,
+  default: defaultIcon,
 };
 
 export { robotIcons };

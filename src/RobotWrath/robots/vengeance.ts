@@ -8,7 +8,7 @@ interface Memory {
 const vengeance: Robot<Memory> = {
   name: "Vengeance",
   color: "#50A",
-  icon: robotIcons.robot,
+  icon: robotIcons.default,
   author: "Nick",
   init: (yourId, robotIds) => {
     return {

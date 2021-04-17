@@ -1,0 +1,28 @@
+{
+  "Generates a Robot Wrath robot": {
+    "prefix": "genRobot",
+    "body": [
+      "import { robotIcons } from \"../Images\";",
+      "import { Robot } from \"../interfaces\";",
+      "",
+      "interface Memory {}",
+      "",
+      "const $TM_FILENAME_BASE: Robot<Memory> = {",
+      "  name: \"${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}\",",
+      "  color: \"#FFFFFF\",",
+      "  icon: robotIcons.default,",
+      "  author: \"[YOUR NAME HERE]\",",
+      "  init: (yourId, enemyIds) => {",
+      "    return {};",
+      "  },",
+      "  execute: (you, enemies, memory) => {",
+      "    return undefined;",
+      "  },",
+      "};",
+      "",
+      "export { $TM_FILENAME_BASE };",
+      ""
+    ],
+    "description": "Generates a Robot Wrath robot"
+  }
+}
