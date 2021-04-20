@@ -108,6 +108,10 @@ export function advance(
         }
         const end = performance.now();
 
+        if (target && !livingRobotStatuses.some((lr) => lr.robotId == target)) {
+          target = r.id;
+        }
+
         return {
           robotId: r.id,
           target,

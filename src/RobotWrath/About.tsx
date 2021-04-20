@@ -67,10 +67,8 @@ const About: React.FC<IProps> = ({}) => {
           </li>
           <li>Power cannot go below 1</li>
           <li>
-            A robot <i>can</i> attack itself
-          </li>
-          <li>
-            Nothing happens when a robot attacks a dead or non-existent robot
+            If your robot throws an error, or if it attacks a dead/non-existent
+            robot, <i>it attacks itself instead</i>
           </li>
           <li>
             After 1000 turns, <strong>sudden death</strong> begins. All robots
