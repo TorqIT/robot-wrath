@@ -138,6 +138,24 @@ const RobotWrath: React.FC<IProps> = ({}) => {
             setEvents(simulateGame(combatants, []).events);
           }
         }}
+        onPerformMany={async () => {
+          let nextVictories = victories.map((v) => ({ ...v }));
+
+          for (let j = 0; j < 100; j++) {
+            setCurrentSimulation(j + 1);
+            const combatants = generateCombatants(robotEntrants);
+            const results = simulateGame(combatants, []);
+            nextVictories = addVictoryToLog(
+              combatants.find((r) => r.id == results.victor)?.staticId,
+              nextVictories
+            );
+            setVictories(nextVictories);
+
+            await sleep(10);
+          }
+
+          setCurrentSimulation(undefined);
+        }}
         hasVictor={victor !== undefined}
         isRunning={isRunning}
       />
