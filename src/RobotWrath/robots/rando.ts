@@ -4,7 +4,7 @@ import { Robot } from "../interfaces";
 const rando: Robot<{}> = {
   name: "Rando",
   color: "#f33",
-  icon: robotIcons.default,
+  icon: robotIcons.chomp,
   hue: 180,
   author: "Nick",
   init: () => ({}),

@@ -6,7 +6,7 @@ interface Memory {}
 const knockYouDown: Robot<Memory> = {
   name: "Knock You Down",
   color: "#11FF11",
-  icon: robotIcons.default,
+  icon: robotIcons.saber,
   author: "Nick",
   hue: 260,
   init: (yourId, enemyIds) => {
