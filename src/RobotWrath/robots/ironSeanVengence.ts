@@ -14,8 +14,8 @@ interface RobotStats {
   timesDefended: number;
 }
 
-export const ironSean: Robot<Memory> = {
-  name: "IronSean",
+export const ironSeanVengance: Robot<Memory> = {
+  name: "IronSean - Vengence",
   color: "#0000FF",
   icon: "http://thecatapi.com/api/images/get?format=src&type=gif",
   author: "Sean",
@@ -59,28 +59,28 @@ export const ironSean: Robot<Memory> = {
     // }
 
     // //find the bot attacking me the most
-    // target = enemies.reduce((target, enemy) => {
-    //   const targetStats = memory.robots[target.robotId];
-    //   const enemyStats = memory.robots[enemy.robotId];
-    //   if (
-    //     enemyStats.attackedTarget[you.robotId] <
-    //     targetStats.attackedTarget[you.robotId]
-    //   ) {
-    //     return enemy;
-    //   } else return target;
-    // }, enemies[0]);
-
-    // find least defending robot
     return enemies.reduce((target, enemy) => {
       const targetStats = memory.robots[target.robotId];
       const enemyStats = memory.robots[enemy.robotId];
       if (
-        enemyStats.defend / enemyStats.attack <
-        targetStats.defend / targetStats.attack
+        enemyStats.attackedTarget[you.robotId] <
+        targetStats.attackedTarget[you.robotId]
       ) {
         return enemy;
       } else return target;
     }, enemies[0]).robotId;
+
+    // find least defending robot
+    // target = enemies.reduce((target, enemy) => {
+    //   const targetStats = memory.robots[target.robotId];
+    //   const enemyStats = memory.robots[enemy.robotId];
+    //   if (
+    //     enemyStats.defend / enemyStats.attack <
+    //     targetStats.defend / targetStats.attack
+    //   ) {
+    //     return enemy;
+    //   } else return target;
+    // }, enemies[0]);
 
     // //find the bot with the lowest health
     // return enemies.reduce((minHealthEnemy, enemy) => {
@@ -88,7 +88,7 @@ export const ironSean: Robot<Memory> = {
     //   else return minHealthEnemy;
     // }).robotId;
 
-    //find the bot with the highest power
+    // //find the bot with the highest power
     // return enemies.reduce((maxPower, enemy) => {
     //   if (enemy.power < maxPower.power) return enemy;
     //   else return maxPower;

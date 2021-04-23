@@ -8,7 +8,7 @@ const bomb: Robot<{}> = {
   author: "Nick",
   init: () => ({}),
   execute: (you, robots) => {
-    if (you.health > 700) {
+    if (you.health > 500) {
       return;
     }
 

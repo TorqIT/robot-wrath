@@ -14,8 +14,8 @@ interface RobotStats {
   timesDefended: number;
 }
 
-export const ironSean: Robot<Memory> = {
-  name: "IronSean",
+export const ironSeanMaxPower: Robot<Memory> = {
+  name: "IronSean - MaxPower",
   color: "#0000FF",
   icon: "http://thecatapi.com/api/images/get?format=src&type=gif",
   author: "Sean",
@@ -71,24 +71,24 @@ export const ironSean: Robot<Memory> = {
     // }, enemies[0]);
 
     // find least defending robot
-    return enemies.reduce((target, enemy) => {
-      const targetStats = memory.robots[target.robotId];
-      const enemyStats = memory.robots[enemy.robotId];
-      if (
-        enemyStats.defend / enemyStats.attack <
-        targetStats.defend / targetStats.attack
-      ) {
-        return enemy;
-      } else return target;
-    }, enemies[0]).robotId;
+    // target = enemies.reduce((target, enemy) => {
+    //   const targetStats = memory.robots[target.robotId];
+    //   const enemyStats = memory.robots[enemy.robotId];
+    //   if (
+    //     enemyStats.defend / enemyStats.attack <
+    //     targetStats.defend / targetStats.attack
+    //   ) {
+    //     return enemy;
+    //   } else return target;
+    // }, enemies[0]);
 
-    // //find the bot with the lowest health
-    // return enemies.reduce((minHealthEnemy, enemy) => {
-    //   if (enemy.health < minHealthEnemy.health) return enemy;
-    //   else return minHealthEnemy;
-    // }).robotId;
+    //find the bot with the lowest health
+    return enemies.reduce((minHealthEnemy, enemy) => {
+      if (enemy.health < minHealthEnemy.health) return enemy;
+      else return minHealthEnemy;
+    }).robotId;
 
-    //find the bot with the highest power
+    // //find the bot with the highest power
     // return enemies.reduce((maxPower, enemy) => {
     //   if (enemy.power < maxPower.power) return enemy;
     //   else return maxPower;

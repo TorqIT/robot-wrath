@@ -8,6 +8,10 @@ import { death } from "./robots/death";
 import { hater } from "./robots/hater";
 import { iHateBotOne } from "./robots/iHateBotOne";
 import { ironSean } from "./robots/ironSean";
+import { ironSeanDefensive } from "./robots/ironSeanDefensive";
+import { ironSeanLowestHealth } from "./robots/ironSeanLowestHealth";
+import { ironSeanMaxPower } from "./robots/ironSeanMaxPower";
+import { ironSeanVengance } from "./robots/ironSeanVengence";
 import { knockYouDown } from "./robots/knockYouDown";
 import { luke } from "./robots/luke";
 import { notEduardosRobot } from "./robots/notEduardosRobot";
@@ -43,4 +47,8 @@ export const robots: Robot<any>[] = [
   shield,
   sniper,
   ironSean,
+  ironSeanDefensive,
+  ironSeanLowestHealth,
+  ironSeanMaxPower,
+  ironSeanVengance,
 ];
